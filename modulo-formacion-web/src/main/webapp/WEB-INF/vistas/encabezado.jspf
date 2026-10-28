@@ -1,0 +1,5 @@
+<%@ page pageEncoding="UTF-8" %>
+<header class="barra">
+  <a class="logo" href="${pageContext.request.contextPath}/">📄 CV Builder</a>
+  <nav><a href="${pageContext.request.contextPath}/formacion">Formación académica</a></nav>
+</header>

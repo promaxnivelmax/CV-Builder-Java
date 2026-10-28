@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CV Builder - Módulo de formación académica</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+<header class="barra"><a class="logo" href="./">📄 CV Builder</a></header>
+<main class="contenedor angosto">
+  <h1>Módulo de formación académica</h1>
+  <p class="ayuda">Aplicación web con Servlets y JSP. Proyecto formativo SENA ADSO – ficha 3186596.</p>
+  <!-- Formulario HTML que envía una petición GET al servlet -->
+  <form class="tarjeta" method="get" action="formacion">
+    <p>Consulta los estudios registrados en tu hoja de vida.</p>
+    <button class="btn" type="submit">Ver mis estudios</button>
+  </form>
+  <!-- Formulario HTML que abre el formulario de registro (GET con parámetro accion) -->
+  <form class="tarjeta" method="get" action="formacion">
+    <input type="hidden" name="accion" value="nuevo">
+    <p>Registra un nuevo estudio.</p>
+    <button class="btn sec" type="submit">Agregar estudio</button>
+  </form>
+</main>
+</body>
+</html>
