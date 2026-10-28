@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Experiencia - CV Builder</title>
+  <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<header class="barra"><span class="logo">📄 CV Builder</span><span>Experiencia laboral</span></header>
+<main class="contenedor angosto">
+  <h1 th:text="${experiencia.idExperiencia == null} ? 'Agregar experiencia' : 'Editar experiencia'">Experiencia</h1>
+  <p class="ayuda">Los campos marcados con * son obligatorios.</p>
+  <form class="tarjeta" th:action="@{/experiencia/guardar}" th:object="${experiencia}" method="post" novalidate>
+    <div class="alerta error" th:if="${#fields.hasAnyErrors()}">
+      <ul><li th:each="err : ${#fields.allErrors()}" th:text="${err}">Error</li></ul>
+    </div>
+    <input type="hidden" th:field="*{idExperiencia}">
+    <label for="cargo">Cargo *</label>
+    <input id="cargo" th:field="*{cargo}" th:classappend="${#fields.hasErrors('cargo')} ? 'invalido'" maxlength="80" placeholder="Ej.: Auxiliar administrativo">
+    <label for="empresa">Empresa *</label>
+    <input id="empresa" th:field="*{empresa}" th:classappend="${#fields.hasErrors('empresa')} ? 'invalido'" maxlength="100" placeholder="Ej.: Soluciones Digitales S.A.S.">
+    <div class="fila">
+      <div><label for="fechaInicio">Fecha de inicio *</label>
+        <input type="date" id="fechaInicio" th:field="*{fechaInicio}" th:classappend="${#fields.hasErrors('fechaInicio')} ? 'invalido'"></div>
+      <div><label for="fechaFin">Fecha de finalización</label>
+        <input type="date" id="fechaFin" th:field="*{fechaFin}"></div>
+    </div>
+    <label class="check"><input type="checkbox" th:field="*{trabajoActual}"> Es mi trabajo actual</label>
+    <label for="funciones">Funciones (máximo 500 caracteres)</label>
+    <textarea id="funciones" th:field="*{funciones}" rows="4" maxlength="500"></textarea>
+    <div class="botones">
+      <a class="btn sec" th:href="@{/experiencia}">Cancelar</a>
+      <button class="btn" type="submit">Guardar</button>
+    </div>
+  </form>
+</main>
+</body>
+</html>

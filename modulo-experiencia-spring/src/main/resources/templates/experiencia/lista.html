@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Experiencia laboral - CV Builder</title>
+  <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<header class="barra"><span class="logo">📄 CV Builder</span><span>Experiencia laboral</span></header>
+<main class="contenedor">
+  <div class="titulo">
+    <h1>Experiencia laboral</h1>
+    <a class="btn" th:href="@{/experiencia/nueva}">+ Agregar experiencia</a>
+  </div>
+  <div class="alerta ok" th:if="${mensaje}" th:text="${mensaje}"></div>
+  <div class="alerta error" th:if="${error}" th:text="${error}"></div>
+  <p class="ayuda">Registros: <b th:text="${#lists.size(experiencias)}">0</b></p>
+  <table>
+    <thead><tr><th>Cargo</th><th>Empresa</th><th>Periodo</th><th>Funciones</th><th>Acciones</th></tr></thead>
+    <tbody>
+      <tr th:if="${#lists.isEmpty(experiencias)}"><td colspan="5" class="vacio">Aún no has registrado experiencia laboral.</td></tr>
+      <tr th:each="e : ${experiencias}">
+        <td th:text="${e.cargo}">Cargo</td>
+        <td th:text="${e.empresa}">Empresa</td>
+        <td th:text="${#temporals.format(e.fechaInicio,'dd/MM/yyyy')} + ' – ' + (${e.trabajoActual} ? 'Actual' : ${#temporals.format(e.fechaFin,'dd/MM/yyyy')})">Periodo</td>
+        <td th:text="${e.funciones}">Funciones</td>
+        <td class="acciones">
+          <a class="btn sec" th:href="@{/experiencia/{id}/editar(id=${e.idExperiencia})}">Editar</a>
+          <form th:action="@{/experiencia/{id}/eliminar(id=${e.idExperiencia})}" method="post"
+                onsubmit="return confirm('¿Eliminar esta experiencia?');">
+            <button class="btn peligro" type="submit">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+</body>
+</html>
